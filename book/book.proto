@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "github.com/muke-sh/grpc-curd/book";
+
+package book;
+
+message CreateBookRequest {
+    Book book = 1;
+}
+
+message Book {
+    string Title = 1;
+    string Author = 2;
+    string ISBN = 3;
+    int64 Price = 4;
+}
+
+message Reponse {
+    string msg = 1;
+    string status = 2;
+}
+
+message FindBookRequest {
+    string id = 1;
+}
+
+message BookResponse {
+    Book book = 1;
+}
+
+message UpdateBookRequest {
+    string id = 1;
+    Book book = 2;
+}
+
+service BookService {
+    rpc CreateBook(CreateBookRequest) returns (Reponse);
+    rpc FindBook(FindBookRequest) returns (Book);
+    rpc DeleteBook(FindBookRequest) returns (Reponse);
+    rpc UpdateBook(UpdateBookRequest) returns (Book);
+}
+
